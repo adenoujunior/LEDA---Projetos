@@ -17,3 +17,13 @@
   <level>FINE</level>
   <message>File 118210879-ADENOU DANTAS DE FARIAS JUNIOR.zip was received. It was sent by ADENOU DANTAS DE FARIAS JUNIOR from IP 192.168.0.127 at 20-04-2023 12*46*18</message>
 </record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-04-20T14:10:47.507-0300</date>
+  <logger>ADENOU DANTAS DE FARIAS JUNIOR</logger>
+  <level>FINE</level>
+  <message>File 118210879-ADENOU DANTAS DE FARIAS JUNIOR.zip was received. It was sent by ADENOU DANTAS DE FARIAS JUNIOR from IP 192.168.0.127 at 20-04-2023 14*10*47</message>
+</record>

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"sorting","l":"AbstractSorting"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"sorting.linearSorting","l":"CountingSort"},{"p":"sorting.linearSorting","l":"ExtendedCountingSort"},{"p":"sorting","l":"Sorting"},{"p":"sorting.test","l":"StudentSortingTest"},{"p":"util","l":"Util"}];updateSearchResults();
