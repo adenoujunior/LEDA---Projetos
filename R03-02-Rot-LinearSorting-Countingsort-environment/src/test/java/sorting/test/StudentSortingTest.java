@@ -1,5 +1,6 @@
 package sorting.test;
 
+import sorting.linearSorting.CountingSort; // Importação da classe CountingSort
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -38,8 +39,7 @@ public class StudentSortingTest {
 	private void getImplementation() {
 		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
 		// null
-		this.implementation = null;
-		Assert.fail("Implementation not provided");
+		this.implementation = new CountingSort();
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {

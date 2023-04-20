@@ -16,9 +16,39 @@ import sorting.AbstractSorting;
 public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
-	public void sort(Integer[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
-	}
+    public void sort(Integer[] array, int leftIndex, int rightIndex) {
+		if (array == null || leftIndex < 0 || rightIndex >= array.length || leftIndex >= rightIndex) {
+            return;
+        }
 
+        // Encontrando o maior e o menor elemento do array
+        int max = array[leftIndex];
+        int min = array[leftIndex];
+        for (int i = leftIndex + 1; i <= rightIndex; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+
+        // Criando um array auxiliar para contar a frequência dos elementos
+        int range = max - min + 1;
+        int[] count = new int[range];
+
+        // Contando a frequência dos elementos no array original
+        for (int i = leftIndex; i <= rightIndex; i++) {
+            count[array[i] - min]++;
+        }
+
+        // Atualizando o array original com os elementos ordenados
+        int arrayIndex = leftIndex;
+        for (int i = 0; i < range; i++) {
+            while (count[i] > 0) {
+                array[arrayIndex++] = i + min;
+                count[i]--;
+            }
+        }
+    }
 }
