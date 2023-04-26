@@ -1,5 +1,7 @@
 package orderStatistic;
 
+import util.Util;
+
 /**
  * O quickselect eh um algoritmo baseado no quicksort para
  * descobrir/selectionar, em tempo linear, a k-esima estatistica de ordem
@@ -41,8 +43,51 @@ public class QuickSelect<T extends Comparable<T>> {
 	 * @return
 	 *
 	 */
+
+	private int partition(T[] array, int low, int high) {
+		// Escolhe o pivot como o elemento do meio.
+		int middle = low + (high - low) / 2;
+		T pivot = array[middle];
+
+		// Move o pivot para o final do array.
+		Util.swap(array, middle, high);
+
+		int i = low;
+		// Particiona o array em dois subarrays.
+		for (int j = low; j < high; j++) {
+			if (array[j].compareTo(pivot) <= 0) {
+				Util.swap(array, i, j);
+				i++;
+			}
+		}
+
+		// Move o pivot para a posição correta.
+		Util.swap(array, i, high);
+
+		// Retorna a posição do pivot.
+		return i;
+	}
+
 	public T quickSelect(T[] array, int k) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (array == null || array.length == 0 || k <= 0 || k > array.length) {
+			return null; // Retorna null se o array for vazio ou se a ordem estiver fora do tamanho do array.
+		}
+		return quickSelect(array, k, 0, array.length - 1);
+	}
+
+	private T quickSelect(T[] array, int k, int low, int high) {
+		if (low == high) { // Se o intervalo tem apenas um elemento, retorna esse elemento
+			return array[low];
+		}
+
+		int pivotIndex = partition(array, low, high); // Encontra o índice do pivot após a partição
+
+		if (k == pivotIndex + 1) { // Se o k-esimo menor elemento é o pivot, retorna o pivot
+			return array[pivotIndex];
+		} else if (k < pivotIndex + 1) { // Se o k-esimo menor elemento está na parte esquerda do pivot
+			return quickSelect(array, k, low, pivotIndex - 1);
+		} else {
+			return quickSelect(array, k, pivotIndex + 1, high);
+		}
 	}
 }
