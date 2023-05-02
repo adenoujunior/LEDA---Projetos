@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"problems","l":"Floor"},{"p":"problems","l":"FloorBinarySearchImpl"},{"p":"orderStatistic","l":"KLargest"},{"p":"orderStatistic","l":"KLargestOrderStatisticsImpl"},{"p":"orderStatistic","l":"QuickSelect"},{"p":"util","l":"Util"}];updateSearchResults();
