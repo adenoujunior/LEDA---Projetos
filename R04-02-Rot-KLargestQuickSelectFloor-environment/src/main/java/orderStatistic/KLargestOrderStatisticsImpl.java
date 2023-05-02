@@ -1,5 +1,8 @@
 package orderStatistic;
 
+import java.util.Arrays;
+import util.Util;
+
 /**
  * Uma implementacao da interface KLargest que usa estatisticas de ordem para 
  * retornar um array com os k maiores elementos de um conjunto de dados/array.
@@ -29,9 +32,23 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
 	@Override
 	public T[] getKLargest(T[] array, int k) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
-		//este metodo deve obrigatoriamente usar o orderStatistics abaixo.
+		 if (array == null || k < 1 || k > array.length) {
+	            return Arrays.copyOf(array, 0);
+	        }
+
+	        T[] kLargest = Arrays.copyOf(array, k);
+	        for (int i = k / 2 - 1; i >= 0; i--) {
+	            heapifyMax(kLargest, k, i);
+	        }
+
+	        for (int i = k; i < array.length; i++) {
+	            if (array[i].compareTo(kLargest[0]) > 0) {
+	                kLargest[0] = array[i];
+	                heapifyMax(kLargest, k, 0);
+	            }
+	        }
+
+	        return kLargest;
 	}
 
 	/**
@@ -46,7 +63,65 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	 * @return
 	 */
 	public T orderStatistics(T[] array, int k){
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");		
+		if (array == null || k < 1 || k > array.length) {
+            return null;
+        }
+
+        return orderStatistics(array, 0, array.length - 1, k);		
 	}
+	
+	private T orderStatistics(T[] array, int left, int right, int k) {
+        if (left == right) {
+            return array[left];
+        }
+
+        int pivotIndex = partition(array, left, right);
+        int pivotRank = pivotIndex - left + 1;
+
+        if (k == pivotRank) {
+            return array[pivotIndex];
+        } else if (k < pivotRank) {
+            return orderStatistics(array, left, pivotIndex - 1, k);
+        } else {
+            return orderStatistics(array, pivotIndex + 1, right, k - pivotRank);
+        }
+    }
+	
+	private int partition(T[] array, int left, int right) {
+        int pivotIndex = left + (right - left) / 2;
+        T pivotValue = array[pivotIndex];
+
+        Util.swap(array, pivotIndex, right);
+
+        int storeIndex = left;
+        for (int i = left; i < right; i++) {
+            if (array[i].compareTo(pivotValue) < 0) {
+                Util.swap(array, i, storeIndex);
+                storeIndex++;
+            }
+        }
+
+        Util.swap(array, storeIndex, right);
+        return storeIndex;
+    }
+
+    private void heapifyMax(T[] array, int heapSize, int rootIndex) {
+        int leftIndex = 2 * rootIndex + 1;
+        int rightIndex = 2 * rootIndex + 2;
+
+        int largestIndex = rootIndex;
+        if (leftIndex < heapSize && array[leftIndex].compareTo(array[largestIndex]) > 0) {
+            largestIndex = leftIndex;
+        }
+
+        if (rightIndex < heapSize && array[rightIndex].compareTo(array[largestIndex]) > 0) {
+            largestIndex = rightIndex;
+        }
+
+        if (largestIndex != rootIndex) {
+            Util.swap(array, rootIndex, largestIndex);
+            heapifyMax(array, heapSize, largestIndex);
+        }
+    }
+	
 }
